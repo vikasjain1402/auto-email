@@ -1,10 +1,14 @@
 import smtplib
 import imghdr
 import os
+
+
 username=os.environ.get("GMAIL_USERNAME")
 password=os.environ.get("GMAIL_PASSWORD")
-
+print(username,password)
 no_of_photoes_in_mail=5
+source_Directory='/home/vikas/Pictures/'
+files=[i for i in os.listdir(source_Directory) if os.path.isfile(os.path.join(source_Directory,i))]
 
 from email.message import EmailMessage
 msg=EmailMessage()
@@ -14,14 +18,13 @@ msg['To']=username
 msg.set_content("Image attavhed body content")
 count=1
 
+
 with smtplib.SMTP_SSL("smtp.gmail.com",465) as connect_obj:
     connect_obj.login(username,password)
 
-    for p,d,f in os.walk(os.getcwd()):
-        if p.rsplit("/",1)[-1]=="venv":
-            break
+    for f in files:
         for filename in f:
-            filepath=os.path.join(p, filename)
+            filepath=os.path.join(source_Directory, filename)
             if imghdr.what(filepath)=="jpeg":
                 with open(filename,"rb") as ff:
                     msg.add_attachment(ff.read(), maintype='image',subtype="jpeg",filename=filename)
