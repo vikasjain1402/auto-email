@@ -5,7 +5,7 @@ import os
 
 username=os.environ.get("GMAIL_USERNAME")
 password=os.environ.get("GMAIL_PASSWORD")
-print(username,password)
+
 no_of_photoes_in_mail=5
 source_Directory='/home/vikas/Pictures/'
 files=[i for i in os.listdir(source_Directory) if os.path.isfile(os.path.join(source_Directory,i))]
