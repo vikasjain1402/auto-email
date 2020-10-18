@@ -7,7 +7,7 @@ category=["science","kid","school","technolgy","fashion","nature","water","fire"
 from itertools import combinations
 a=combinations(category,2)
 
-downloadpath=os.path.join("/home/vikas/Desktop/","")
+downloadpath="/home/vikas/Desktop/"
 for i in a:
     urls=url+",".join(i)
     data=requests.get(urls)
