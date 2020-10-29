@@ -7,12 +7,15 @@ category=["science","kid","school","technolgy","fashion","nature","water","fire"
 from itertools import combinations
 a=combinations(category,2)
 
-downloadpath="/home/vikas/Desktop/"
-for i in a:
-    urls=url+",".join(i)
-    data=requests.get(urls)
-    if data.status_code==200:
-        filename=os.path.join(downloadpath,"-".join(i)+".jpeg")
-        with open(filename,"wb") as a:
-            a.write(data.content)
-            break
+downloadpath="/home/vikas/Pictures/"
+try:
+    for i in a:
+        urls=url+",".join(i)
+        data=requests.get(urls)
+        if data.status_code==200:
+            filename=os.path.join(downloadpath,"_".join(i)+".jpeg")
+            with open(filename,"wb") as a:
+                a.write(data.content)
+                print(f"saved to {filename}")
+except KeyboardInterrupt:
+    print("Key board Interruption. Exit....")
